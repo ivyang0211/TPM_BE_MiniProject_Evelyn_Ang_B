@@ -945,37 +945,58 @@
     </script>
     @endif
 
-    <div class="card-form">
-        <h1 style="font-weight: bold; margin-bottom:22px; font-size:25px;" >CREATE PLANE</h1>
-        <form action="{{ route('insertData') }}" method="POST" enctype="multipart/form-data">
-            <div class="card-header"></div>
-            <div class="card-body">                                
-
-                @csrf                
-                <label for="name">Image:</label>
-                <input type="file" name="imageUpload" id="imageUpload" accept="image/*" required>
-
-                <label for="name">Plane Name:</label>
-                <input type="text" name="name" id="name" required>
-
-                <label for="type">Type:</label>
-                <input type="text" name="type" id="type" required>
-
-                <label for="brand">Brand:</label>
-                <input type="text" name="brand" id="brand" required>
-
-                <label for="quantity">Quantity:</label>
-                <input type="number" name="quantity" id="quantity" required>
-
-
-
-                <button id="btn-submit" type="submit">
-                    SUBMIT
-                </button>
-            </div>            
-        </form>
+    <div class="card-wrapper" style="display: flex; flex-direction:column; gap:12px;">
+        <div class="card-form">
+            <h1 style="font-weight: bold; margin-bottom:22px; font-size:25px;" >CREATE PLANE</h1>
+            <form action="{{ route('insertData') }}" method="POST" enctype="multipart/form-data">
+                <div class="card-header"></div>
+                <div class="card-body">                                
+    
+                    @csrf                
+                    <label for="name">Image:</label>
+                    <input type="file" name="imageUpload" id="imageUpload" accept="image/*" required>
+    
+                    <label for="name">Plane Name:</label>
+                    <input type="text" name="name" id="name" required>
+    
+                    <label for="type">Type:</label>
+                    <input type="text" name="type" id="type" required>
+    
+                    <label for="brand">Brand:</label>
+                    <input type="text" name="brand" id="brand" required>
+    
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity" id="quantity" required>
+    
+    
+    
+                    <button id="btn-submit" type="submit">
+                        SUBMIT
+                    </button>
+                </div>            
+            </form>
+        </div>
+        <div class="card-form">
+            <h1 style="font-weight: bold;  font-size:25px;" >GENERATE PLANES</h1>
+            <p style="margin-bottom:22px">Generate random planes data</p>
+            <form action="{{ route('runSeeder') }}" method="POST" enctype="multipart/form-data">
+                <div class="card-header"></div>
+                <div class="card-body">                                
+    
+                    @csrf                        
+                    
+                    <label for="quantity">Count:</label>
+                    <input type="number" name="count" id="count" required>
+    
+    
+                    <button id="btn-submit" type="submit">
+                        GENERATE
+                    </button>
+                </div>            
+            </form>
+        </div>
+    
     </div>
-
 
 </body>
 <style>

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Plane;
+use Config;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Session;
@@ -14,6 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Plane::factory(2)->create();
+        $count = Config::get('seeder.count', 1);
+        Plane::factory($count)->create();
     }
 }

@@ -15,6 +15,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Create Data Route (Requires Authentication)
 Route::middleware('auth')->get('/create', [InsertDataController::class, 'index']);
 Route::middleware('auth')->post('/create', [InsertDataController::class, 'insertData'])->name('insertData');
+Route::middleware('auth')->post('/run-seeder', [InsertDataController::class, 'runSeeder'])->name('runSeeder');
 
 // Delete Data Route (Requires Authentication)
 Route::middleware('auth')->delete('/delete/{id}', [HomeController::class, 'destroy'])->name('plane.destroy');
@@ -24,6 +25,9 @@ Route::middleware('auth')->put('/update/{id}', [EditController::class, 'update']
 
 // Edit: Get Plane Details (Requires Authentication)
 Route::middleware('auth')->get('/edit/{id}', [EditController::class, 'edit'])->name('plane.edit');
+
+
+
 
 
 // AUTHENTICATION :

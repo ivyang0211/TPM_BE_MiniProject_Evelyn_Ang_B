@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Plane;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Validator;
 
 class InsertDataController extends Controller
@@ -11,6 +12,25 @@ class InsertDataController extends Controller
     public function index()
     {
         return view('create');
+    }
+
+    public function runSeeder(Request $request)
+    {
+        $request->validate([
+            'count' => 'required|integer|min:1',
+        ]);
+
+        config(['seeder.count' => $request->input('count')]);
+
+        // Run the specific seeder
+        Artisan::call('db:seed', [
+            '--class' => 'DatabaseSeeder',
+            
+        ]);
+
+        // Return a response or redirect
+        session()->flash('success', 'Seeder has successfully Executed!');
+        return redirect()->route('home');
     }
    
     public function insertData(Request $request)
