@@ -972,42 +972,34 @@
 
                 <main class="mt-6">
                     <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
-
-                        @empty($planes)
-                            <h1>Planes are Empty</h1>
-                        @endempty
-
-                        @foreach ($planes as $plane)
-                        
+                
+                        @forelse ($planes as $plane)
                         <div href="" id="docs-card"
                             class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
                             <div id="screenshot-container" class="relative flex w-full flex-1 items-stretch">
-
-
                                 <div
                                     class="absolute -bottom-16 -left-16 h-40 w-[calc(100%+8rem)] bg-gradient-to-b from-transparent via-white to-white dark:via-zinc-900 dark:to-zinc-900">
                                 </div>
                             </div>
-
+                
                             <div class="relative flex items-center gap-6 lg:items-end">
                                 <div id="docs-card-content" class="flex items-start gap-6 lg:flex-col">
-                                  
-                                    <img src="{{ $plane -> path }}" alt="" style="object-fit: cover; border-radius: 8px; height: 30vh; width: 100vh;  ">
-
+                                    <img src="{{ $plane->path }}" alt="" style="object-fit: cover; border-radius: 8px; height: 30vh; width: 100vh;">
+                
                                     <div class="pt-3 sm:pt-5 lg:pt-0">
                                         <h2 class="text-xl font-semibold text-black dark:text-white">
                                             {{ strtoupper($plane->name) }}</h2>
-
+                
                                         <p class="mt-4 text-sm/relaxed">
-
-                                            Type : {{$plane -> type}},<br>
-                                            Brand : {{$plane -> brand}},<br>
-                                            Quantity : {{$plane -> quantity}},<br>
-                                            Added at : {{$plane -> added_at}}.<br>
+                                            Type : {{ $plane->type }}<br>
+                                            Brand : {{ $plane->brand }}<br>
+                                            Quantity : {{ $plane->quantity }}<br>
+                                            Added at : {{ $plane->added_at }}<br>
                                         </p>
+                
                                         @if (Auth::check())
                                         <div class="mt-4" style="display:flex;flex-direction:row; gap:8px;">
-                                            <a href="/edit/{{$plane->id}}">
+                                            <a href="/edit/{{ $plane->id }}">
                                                 <div class=""
                                                     style="background-color: #b77a10; display:flex; flex-direction:row; gap:12px; align-items:center; border-radius:8px; padding:8px;">
                                                     <i class="fa-solid fa-pen"></i>
@@ -1023,22 +1015,19 @@
                                                     <p>Delete</p>
                                                 </button>
                                             </form>
-                                        </div>    
+                                        </div>
                                         @endif
-                                        
                                     </div>
                                 </div>
-
-
-
                             </div>
                         </div>
-                        @endforeach
-
+                        @empty
+                        <h1 style="font-size: 100px; line-height:90%; font-weight:700; ">Planes are Empty.</h1>
+                        @endforelse
+                
                     </div>
-
                 </main>
-
+                
                 <footer class="py-16 text-center text-sm text-black dark:text-white/70">
                     ©2024 Evelyn Ang <br>
                     All Right Reserved
