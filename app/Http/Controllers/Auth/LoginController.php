@@ -23,7 +23,9 @@ class LoginController extends Controller
         ]);
 
         // Attempt to authenticate the user
-        if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
+        if (Auth::attempt(
+            $request->only('email', 'password'), 
+            $request->filled('remember'))) {
             return redirect()->route('home'); // Redirect after login
         }
 

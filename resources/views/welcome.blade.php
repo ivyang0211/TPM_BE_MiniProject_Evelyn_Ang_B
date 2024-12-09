@@ -938,7 +938,7 @@
 
                 @if (session('success'))
                 <div class="message-boxz"
-                    style="background-color: rgba(127, 255, 212, 0.541); color: white; border-radius: 8px; padding: 12px; display: flex; flex-direction: row; justify-content: space-between; align-items: center; opacity: 1; transition: opacity 0.5s ease, visibility 0.5s ease;"
+                    style="background-color: rgba(127, 255, 212, 0.541); color: white; border-radius: 8px; padding: 12px; display: flex; flex-direction: row; justify-content: space-between; align-items: center; opacity: 1; transition: opacity 0.5s ease, visibility 0.5s ease; margin-top:22px;"
                     id="flash-message">
                     <h1>{{ session('success') }}</h1>
                     <button type="button" class="close-btn" onclick="dismissMessage()"
@@ -1005,6 +1005,7 @@
                                             Quantity : {{$plane -> quantity}},<br>
                                             Added at : {{$plane -> added_at}}.<br>
                                         </p>
+                                        @if (Auth::check())
                                         <div class="mt-4" style="display:flex;flex-direction:row; gap:8px;">
                                             <a href="/edit/{{$plane->id}}">
                                                 <div class=""
@@ -1022,7 +1023,9 @@
                                                     <p>Delete</p>
                                                 </button>
                                             </form>
-                                        </div>
+                                        </div>    
+                                        @endif
+                                        
                                     </div>
                                 </div>
 

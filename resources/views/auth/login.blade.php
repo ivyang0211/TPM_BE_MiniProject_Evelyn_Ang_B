@@ -980,6 +980,8 @@
         </form>
     </div>
 
+    <a href="/" style="margin-top: 8px;">I'll just look around.</a>
+
 
 </body>
 <style>
