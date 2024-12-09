@@ -936,6 +936,8 @@
                     @endif
                 </div>
 
+                <hr style="  border: 1px solid rgb(143, 143, 143); margin: 20px 2px;">
+
                 @if (session('success'))
                 <div class="message-boxz"
                     style="background-color: rgba(127, 255, 212, 0.541); color: white; border-radius: 8px; padding: 12px; display: flex; flex-direction: row; justify-content: space-between; align-items: center; opacity: 1; transition: opacity 0.5s ease, visibility 0.5s ease; margin-top:22px;"
