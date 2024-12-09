@@ -945,7 +945,7 @@
     </script>
     @endif
 
-    <div class="card-form">
+    <div class="card-form" style="border: 0.8px solid rgba(106, 106, 106, 0.924);">
         <h1 style="font-weight: bold;  font-size:25px;" >REGISTER</h1>
         <p style="margin-bottom:22px;">Already have an Account? <a style="color:#FF2D20;" href="/login">Click Here!</a></p>
         <form method="POST" action="{{ url('register') }}">

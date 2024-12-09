@@ -945,7 +945,7 @@
     </script>
     @endif
 
-    <div class="card-form">
+    <div class="card-form" style="border: 0.8px solid rgba(106, 106, 106, 0.924);">
         <h1 style="font-weight: bold; margin-bottom:22px; font-size:25px;" >EDIT PLANE</h1>
         <form action="{{ route('plane.update', $plane->id) }}" method="POST" enctype="multipart/form-data">
             @csrf

@@ -946,7 +946,7 @@
     @endif
 
     <div class="card-wrapper" style="display: flex; flex-direction:column; gap:12px;">
-        <div class="card-form">
+        <div class="card-form" style="border: 0.8px solid rgba(106, 106, 106, 0.924);">
             <h1 style="font-weight: bold; margin-bottom:22px; font-size:25px;" >CREATE PLANE</h1>
             <form action="{{ route('insertData') }}" method="POST" enctype="multipart/form-data">
                 <div class="card-header"></div>
@@ -976,7 +976,7 @@
                 </div>            
             </form>
         </div>
-        <div class="card-form">
+        <div class="card-form" style="border: 0.8px solid rgba(106, 106, 106, 0.924);">
             <h1 style="font-weight: bold;  font-size:25px;" >GENERATE PLANES</h1>
             <p style="margin-bottom:22px">Generate random planes data</p>
             <form action="{{ route('runSeeder') }}" method="POST" enctype="multipart/form-data">
