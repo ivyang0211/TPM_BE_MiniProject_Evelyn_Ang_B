@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -910,140 +909,135 @@
     @endif
 </head>
 
-<body class="font-sans antialiased dark:bg-black dark:text-white/50">
-    <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-        <img id="background" class="absolute -left-20 top-0 max-w-[877px]"
-            src="https://laravel.com/assets/img/welcome/background.svg" alt="Laravel background" />
-        <div
-            class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
-            <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                
-                <div class="header" style="margin-top: 90px; display:flex; flex-direction:row; justify-content:space-between;">
-                    @if (Auth::check())
-                    <a href="/create" >
-                        <h1 id="tombol-add">+ Create New</h1>
-                    </a>
-                    <form action="{{route('logout')}}" method="post">
-                        @csrf
-                        @method('POST')
-                        <button type="submit" id="tombol-add" style="color: #FF2D20">Logout</button>
-                    </form>
-                    @else
-                    <h1 id="tombol-add"></h1>
-                    <a href="/login" >
-                        <h1 id="tombol-add" style="color: #FF2D20">Login</h1>
-                    </a>
-                    @endif
-                </div>
-
-                @if (session('success'))
-                <div class="message-boxz"
-                    style="background-color: rgba(127, 255, 212, 0.541); color: white; border-radius: 8px; padding: 12px; display: flex; flex-direction: row; justify-content: space-between; align-items: center; opacity: 1; transition: opacity 0.5s ease, visibility 0.5s ease;"
-                    id="flash-message">
-                    <h1>{{ session('success') }}</h1>
-                    <button type="button" class="close-btn" onclick="dismissMessage()"
-                        style="background: none; border: none; color: white; font-size: 20px; cursor: pointer;">
-                        &times;
-                        <!-- The close 'X' symbol -->
-                    </button>
-                </div>
-
-                <script>
-                    // Dismiss the message smoothly
-                    function dismissMessage() {
-                        const messageBox = document.getElementById('flash-message');
-
-                        // Fade out the message by reducing opacity and setting visibility to hidden
-                        messageBox.style.opacity = '0';
-                        messageBox.style.visibility = 'hidden';
-
-                        // After the fade-out transition ends, set display to 'none' to fully hide the message (for layout purposes)
-                        setTimeout(function () {
-                            messageBox.style.display = 'none';
-                        }, 500); // 500ms delay to match the duration of the transition
-                    }
-
-                    // Optionally, automatically dismiss the message after 5 seconds (smooth fade-out)
-                    setTimeout(function () {
-                        dismissMessage(); // Hide the message after 5 seconds
-                    }, 5000); // 5000 milliseconds = 5 seconds
-                </script>
-                @endif
-
-                <main class="mt-6">
-                    <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
-
-                        @empty($planes)
-                            <h1>Planes are Empty</h1>
-                        @endempty
-
-                        @foreach ($planes as $plane)
-                        
-                        <div href="" id="docs-card"
-                            class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
-                            <div id="screenshot-container" class="relative flex w-full flex-1 items-stretch">
-
-
-                                <div
-                                    class="absolute -bottom-16 -left-16 h-40 w-[calc(100%+8rem)] bg-gradient-to-b from-transparent via-white to-white dark:via-zinc-900 dark:to-zinc-900">
-                                </div>
-                            </div>
-
-                            <div class="relative flex items-center gap-6 lg:items-end">
-                                <div id="docs-card-content" class="flex items-start gap-6 lg:flex-col">
-                                  
-                                    <img src="{{ $plane -> path }}" alt="" style="object-fit: cover; border-radius: 8px; height: 30vh; width: 100vh;  ">
-
-                                    <div class="pt-3 sm:pt-5 lg:pt-0">
-                                        <h2 class="text-xl font-semibold text-black dark:text-white">
-                                            {{ strtoupper($plane->name) }}</h2>
-
-                                        <p class="mt-4 text-sm/relaxed">
-
-                                            Type : {{$plane -> type}},<br>
-                                            Brand : {{$plane -> brand}},<br>
-                                            Quantity : {{$plane -> quantity}},<br>
-                                            Added at : {{$plane -> added_at}}.<br>
-                                        </p>
-                                        <div class="mt-4" style="display:flex;flex-direction:row; gap:8px;">
-                                            <a href="/edit/{{$plane->id}}">
-                                                <div class=""
-                                                    style="background-color: #b77a10; display:flex; flex-direction:row; gap:12px; align-items:center; border-radius:8px; padding:8px;">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                    <p>Edit</p>
-                                                </div>
-                                            </a>
-                                            <form action="{{ route('plane.destroy', $plane->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class=""
-                                                    style="background-color: #FF2D20; display:flex; flex-direction:row; gap:9px; align-items:center; border-radius:8px; padding:8px;">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                    <p>Delete</p>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-                        </div>
-                        @endforeach
-
-                    </div>
-
-                </main>
-
-                <footer class="py-16 text-center text-sm text-black dark:text-white/70">
-                    ©2024 Evelyn Ang <br>
-                    All Right Reserved
-                </footer>
-            </div>
-        </div>
+<body class="font-sans antialiased dark:bg-black dark:text-white/50" >
+    
+    @if (session('error'))
+    <div class="message-boxz"
+        style="background-color: rgba(255, 127, 127, 0.541); color: white; border-radius: 8px; padding: 12px; display: flex; flex-direction: row; justify-content: space-between; align-items: center; opacity: 1; transition: opacity 0.5s ease, visibility 0.5s ease; margin-bottom:12px; display:flex; flex-direction:row;"
+        id="flash-message">
+        <h1>{{ session('error') }}</h1>
+        <button type="button" class="close-btn" onclick="dismissMessage()"
+            style="background: none; border: none; color: white; font-size: 20px; cursor: pointer;">
+            &times;
+            <!-- The close 'X' symbol -->
+        </button>
     </div>
-    <script src="https://kit.fontawesome.com/30a901b600.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Dismiss the message smoothly
+        function dismissMessage() {
+            const messageBox = document.getElementById('flash-message');
+
+            // Fade out the message by reducing opacity and setting visibility to hidden
+            messageBox.style.opacity = '0';
+            messageBox.style.visibility = 'hidden';
+
+            // After the fade-out transition ends, set display to 'none' to fully hide the message (for layout purposes)
+            setTimeout(function () {
+                messageBox.style.display = 'none';
+            }, 500); // 500ms delay to match the duration of the transition
+        }
+
+        // Optionally, automatically dismiss the message after 5 seconds (smooth fade-out)
+        setTimeout(function () {
+            dismissMessage(); // Hide the message after 5 seconds
+        }, 5000); // 5000 milliseconds = 5 seconds
+    </script>
+    @endif
+
+    <div class="card-form">
+        <h1 style="font-weight: bold;  font-size:25px;" >LOGIN</h1>
+        <p style="margin-bottom:22px;">Havent registered yet? <a style="color:#FF2D20;" href="/register">Click Here!</a></p>
+        <form method="POST" action="{{ url('login') }}">
+           <div class="card-body">
+            @csrf
+            <div style="display: flex; flex-direction:column;">
+                <label for="email">Email</label>
+                <input type="email" name="email" required>
+            </div>
+            <div style="display: flex; flex-direction:column;">
+                <label for="password">Password</label>
+                <input type="password" name="password" required>
+            </div>
+            <div>
+                <label for="remember">Remember Me</label>
+                <input type="checkbox" name="remember">
+            </div>
+            <button id="btn-submit" type="submit">
+                LOGIN
+            </button>
+    
+            @if ($errors->any())
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+           </div>
+        </form>
+    </div>
+
+
 </body>
+<style>
+    body {
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        background-image: url('https://laravel.com/assets/img/welcome/background.svg');
+        background-repeat: no-repeat;
+        background-color: black;
+    }
+
+    #btn-submit {
+        background-color: #FF2D20;
+        border: none;
+        color: white;
+        margin-top: 12px;
+        padding: 6px;
+        border-radius: 6px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+}
+    }
+
+    label {
+        font-size: 8px;
+        
+    }
+
+    input {
+        border-radius: 4px;
+        color: black;
+        padding: 4px;
+    }
+
+    .card-form {
+        background-color: rgb(51, 51, 51);
+        border-radius: 8px;
+        padding: 12px;
+        color: white;
+        border: #fff;
+        border-width: 2px;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;        
+        gap: 8px;
+    }
+
+    .card-footer {
+        margin-top: 12px;
+    }
+</style>
 
 </html>
