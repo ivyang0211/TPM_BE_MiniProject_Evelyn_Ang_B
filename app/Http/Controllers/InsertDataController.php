@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Plane;
 use Illuminate\Http\Request;
+use Validator;
 
 class InsertDataController extends Controller
 {
@@ -11,33 +12,52 @@ class InsertDataController extends Controller
     {
         return view('create');
     }
+   
     public function insertData(Request $request)
-    {
-        $now = now();
-    
-        // Define validation rules
-        $rules = [
-            'name' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            'brand' => 'required|string|max:255',
-            'quantity' => 'required|integer'
-        ];
-    
-        // Validate the request
-        $validatedData = $request->validate($rules);
-    
-        // Create a new Plane record
-        Plane::create([
-            'name' => $validatedData['name'],
-            'type' => $validatedData['type'],
-            'brand' => $validatedData['brand'],
-            'quantity' => $validatedData['quantity'],
-            'created_at' => $now
-        ]);
-    
-        // Redirect to the home route
-        return redirect()->route('home');
+{
+    // Define validation rules
+    $rules = [
+        'name' => 'required|string|max:255',
+        'type' => 'required|string|max:255',
+        'brand' => 'required|string|max:255',
+        'quantity' => 'required|integer',
+        'imageUpload' => 'required|image|mimes:jpg,jpeg,png,gif'
+    ];
+
+    // Validate the request
+    $validator = Validator::make($request->all(), $rules);
+
+    if ($validator->fails()) {
+        session()->flash('error', 'Validation Error: ' . $validator->errors()->first());
+        return redirect('/create');
     }
+
+
+    // Handle File Upload
+    $file = $request->file('imageUpload');
+    if(!$file->move("uploads", $file->getClientOriginalName()))
+    {
+        session()->flash('error', "Image Failed to Upload");
+        return redirect('/create');
+    } 
+
+    
+
+    // Create a new Plane record
+    Plane::create([
+        'name' => $request->input('name'),
+        'type' => $request->input('type'),
+        'brand' => $request->input('brand'),
+        'quantity' => $request->input('quantity'),
+        'path' => '/uploads/' . $file->getClientOriginalPath(),
+        'created_at' => now(),
+    ]);
+
+    // Redirect with success message
+    session()->flash('success', 'Plane data has been successfully added!');
+    return redirect()->route('home');
+}
+
     
 
 }

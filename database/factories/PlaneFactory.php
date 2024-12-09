@@ -22,6 +22,7 @@ class PlaneFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
+            'path' => $this->faker->word(),
             'type' => $this->faker->randomElement(['Commercial Airplane','Fighter Airplane','Cargo Plane']),
             'brand' => $this->faker->randomElement(['Boeing', 'Lockheed Martin', 'Airbus']),
             'quantity' => $this->faker->randomDigitNotNull(),

@@ -13,6 +13,7 @@ class Plane extends Model
     protected $table = 'planes';
     protected $fillable = [
         'name',
+        'path',
         'type',
         'brand', 
         'quantity', 

@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Plane::factory(10)->create();
+        Plane::factory(2)->create();
     }
 }
