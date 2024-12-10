@@ -22,16 +22,18 @@ class LoginController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        // Attempt to authenticate the user
-        if (Auth::attempt(
+        $isValidCredentials = Auth::attempt(
             $request->only('email', 'password'), 
-            $request->filled('remember'))) {
-            return redirect()->route('home'); // Redirect after login
+            $request->filled('remember'));
+
+        // Attempt to authenticate the user
+        if (!$isValidCredentials) {
+            return back()->withErrors([
+                'email' => 'The provided credentials do not match our records.',
+            ]);
         }
 
-        // If authentication fails
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        // If authentication fails        
+        return redirect()->route('home'); // Redirect after login
     }
 }

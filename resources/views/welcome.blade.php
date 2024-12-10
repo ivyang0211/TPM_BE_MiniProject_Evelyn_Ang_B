@@ -944,7 +944,19 @@
                 <div class="message-boxz"
                     style="
                     border: 1px solid rgba(169, 255, 215, 0.924);
-                    background-color: rgba(127, 255, 212, 0.541); color: white; border-radius: 8px; padding: 12px; display: flex; flex-direction: row; justify-content: space-between; align-items: center; opacity: 1; transition: opacity 0.5s ease, visibility 0.5s ease; margin-top:22px;"
+                    background-color: rgba(127, 255, 212, 0.541); 
+                    color: white; 
+                    border-radius: 8px; 
+                    padding: 12px; 
+                    display: flex; 
+                    flex-direction: row; 
+                    justify-content: space-between; 
+                    align-items: center; 
+                    opacity: 1; 
+                    transition: opacity 0.5s ease, 
+                    visibility 0.5s ease; 
+                    margin-top:22px;
+                    "
                     id="flash-message">
                     <h1>{{ session('success') }}</h1>
                     <button type="button" class="close-btn" onclick="dismissMessage()"

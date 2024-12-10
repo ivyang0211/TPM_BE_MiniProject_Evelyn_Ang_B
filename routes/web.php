@@ -26,10 +26,6 @@ Route::middleware('auth')->put('/update/{id}', [EditController::class, 'update']
 // Edit: Get Plane Details (Requires Authentication)
 Route::middleware('auth')->get('/edit/{id}', [EditController::class, 'edit'])->name('plane.edit');
 
-
-
-
-
 // AUTHENTICATION :
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
